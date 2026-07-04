@@ -1,0 +1,48 @@
+--[[
+    ✨ PREMIUM SCRIPT LOADER (PRO EDITION) ✨
+    🔒 Securely fetching and executing cloud payload.
+]]--
+
+-- 1. Configuration (यूजर और स्क्रिप्ट सेटिंग्स)
+local ScriptName = "L-Lawliet Hub"
+local ScriptURL = "https://raw.githubusercontent.com/MatrixHunYawwr/L-Lawliet/refs/heads/main/WakeUp"
+local LocalPlayer = game:GetService("Players").LocalPlayer
+
+-- 2. Professional Loading Notification (स्क्रीन पर प्रीमियम पॉप-अप)
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title = "⚡ " .. ScriptName,
+    Text = "Hello " .. LocalPlayer.Name .. ", authenticating script...",
+    Duration = 4,
+    Icon = "rbxassetid://4483345998" -- प्रोफेशनल गियर आइकॉन
+})
+
+-- 3. Console Telemetry (बैकग्राउंड लॉगिंग)
+print("========================================================")
+print("📥 [LOADER]: Fetching source from GitHub...")
+print("👤 [USER]: " .. LocalPlayer.Name .. " (ID: " .. LocalPlayer.UserId .. ")")
+print("========================================================")
+
+-- 4. Secure Execution Core (एंटी-क्रैश लोडस्ट्रिंग)
+local Success, ErrorMessage = pcall(function()
+    -- HttpGet के जरिए कोड डाउनलोड करके तुरंत रन () करना
+    loadstring(game:HttpGet(ScriptURL, true))()
+end)
+
+-- 5. Status Feedback (सफलता या गड़बड़ का मैसेज)
+if Success then
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "✅ Status: Success",
+        Text = ScriptName .. " has been successfully executed!",
+        Duration = 4
+    })
+    print("🚀 [SUCCESS]: " .. ScriptName .. " booted up without errors.")
+else
+    -- अगर कोड में गड़बड़ हो या लिंक काम न करे
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "❌ Execution Failed",
+        Text = "Check Developer Console (F9) for details.",
+        Duration = 5
+    })
+    warn("🚨 [ERROR]: Failed to execute script: " .. tostring(ErrorMessage))
+end
+print("========================================================")

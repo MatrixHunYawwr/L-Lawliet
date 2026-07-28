@@ -1,0 +1,46 @@
+-- Ek simple local script jo aap Roblox Studio mein StarterPlayerScripts ya StarterGui mein dal sakte hain
+
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Ek naya ScreenGui banayein
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "SimpleScriptGui"
+screenGui.Parent = playerGui
+
+-- Ek Button banayein
+local textButton = Instance.new("TextButton")
+textButton.Name = "SpeedButton"
+textButton.Size = UDim2.new(0, 200, 0, 50)
+textButton.Position = UDim2.new(0.5, -100, 0.8, -25)
+textButton.Text = "Speed Boost: OFF"
+textButton.TextSize = 18
+textButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+textButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+textButton.Parent = screenGui
+
+-- Button ko rounded corners dene ke liye (Optional)
+local uiCorner = Instance.new("UICorner")
+uiCorner.CornerRadius = UDim.new(0, 8)
+uiCorner.Parent = textButton
+
+-- Button click event logic
+local boosted = false
+
+textButton.MouseButton1Click:Connect(function()
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    
+    if humanoid then
+        boosted = not boosted
+        if boosted then
+            humanoid.WalkSpeed = 32 -- Speed double ho jayegi
+            textButton.Text = "Speed Boost: ON"
+            textButton.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+        else
+            humanoid.WalkSpeed = 16 -- Normal default speed
+            textButton.Text = "Speed Boost: OFF"
+            textButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+        end
+    end
+end)
